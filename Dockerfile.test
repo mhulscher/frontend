@@ -1,0 +1,53 @@
+FROM centos:7
+
+MAINTAINER systeembeheer@nepworldwide.nl
+
+##
+# Install nginx mainline and base dependencies
+
+RUN echo 'Europe/Amsterdam' > /etc/timezone \
+ && rm -f /etc/localtime \
+ && ln -vs /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime \
+ && yum -y install epel-release \
+ && curl -so /etc/pki/rpm-gpg/RPM-GPG-KEY-NGINX http://nginx.org/keys/nginx_signing.key \
+ && echo -e '\
+[nginx]\n\
+name=nginx repo\n\
+baseurl=http://nginx.org/packages/mainline/centos/7/x86_64/\n\
+gpgcheck=1\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-NGINX\n\
+enabled=1' > /etc/yum.repos.d/nginx.repo\
+ && yum -y install \
+     curl \
+     nginx \
+ && rm -f /etc/yum.repos.d/nginx.repo /etc/pki/rpm-gpg/RPM-GPG-KEY-NGINX \
+
+##
+# Clean-up nginx
+
+ && rm -rf /etc/nginx/conf.d/* \
+ && mkdir -pv /var/www/html \
+ && curl --silent --location https://rpm.nodesource.com/setup_6.x | bash - \
+ && yum -y install \
+     git \
+     ruby ruby-devel \
+     python python-devel \
+     nodejs \
+     gcc \
+     gcc-c++ \
+     make \
+ && gem install compass sass --no-ri --no-rdoc \
+ && yum -y remove epel-release nodesource-release \
+ && yum clean all \
+ && find /var/log -type f -exec truncate -s 0 {} \;
+
+COPY nginx/index.html         /var/www/html/index.html
+COPY nginx/nginx.conf         /etc/nginx/nginx.conf
+COPY nginx/www.conf           /etc/nginx/conf.d/www.conf
+COPY nginx/001-logformat.conf /etc/nginx/conf.d/001-logformat.conf
+
+COPY scripts.test/run.sh      /opt/run.sh
+
+WORKDIR "/var/www/html"
+EXPOSE 80 443
+ENTRYPOINT ["/opt/run.sh"]
