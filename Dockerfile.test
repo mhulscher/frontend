@@ -29,6 +29,7 @@ enabled=1' > /etc/yum.repos.d/nginx.repo\
  && mkdir -pv /var/www/html \
  && curl --silent --location https://rpm.nodesource.com/setup_6.x | bash - \
  && yum -y install \
+     bzip2 \
      git \
      ruby ruby-devel \
      python python-devel \
