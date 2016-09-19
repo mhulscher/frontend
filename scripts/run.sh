@@ -22,7 +22,7 @@ else
 fi
 
 cat /var/www/html/env.js | envsubst > /var/www/html/env.js.tmp
-mv  /var/www/html/env.js{.tmp,}
+mv  /var/www/html/env.js.tmp /var/www/html/env.js
 
 nginx -t
 nginx -g "daemon off;" -c /etc/nginx/nginx.conf
