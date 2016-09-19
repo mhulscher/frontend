@@ -2,8 +2,8 @@ FROM nginx:alpine
 MAINTAINER Mitch Hulscher "mitch.hulscher@nepworldwide.nl"
 
 RUN echo 'Europe/Amsterdam' > /etc/timezone \
-  && rm -f /etc/localtime \
-  && ln -vs /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
+ && rm -f /etc/localtime \
+ && ln -vs /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
 
 COPY nginx/index.html         /var/www/html/index.html
 COPY nginx/nginx.conf         /etc/nginx/nginx.conf
