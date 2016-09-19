@@ -21,10 +21,6 @@ enabled=1' > /etc/yum.repos.d/nginx.repo\
      curl \
      nginx \
  && rm -f /etc/yum.repos.d/nginx.repo /etc/pki/rpm-gpg/RPM-GPG-KEY-NGINX \
-
-##
-# Clean-up nginx
-
  && rm -rf /etc/nginx/conf.d/* \
  && mkdir -pv /var/www/html \
  && curl --silent --location https://rpm.nodesource.com/setup_6.x | bash - \
@@ -37,6 +33,13 @@ enabled=1' > /etc/yum.repos.d/nginx.repo\
      gcc \
      gcc-c++ \
      make \
+
+##
+# Set this to prevent JSPM from locking up
+ && echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config \
+#
+##
+
  && gem install compass sass --no-ri --no-rdoc \
  && yum -y remove epel-release nodesource-release \
  && yum clean all \

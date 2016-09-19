@@ -5,7 +5,7 @@ set -eufo pipefail
 ###
 # Symlink cache directories
 
-CACHE_DIRS="npm node_gyp jspm"
+CACHE_DIRS="npm node_gyp jspm ssh"
 
 for DIR in $CACHE_DIRS; do
   if [[ -d "/$DIR" ]]; then
