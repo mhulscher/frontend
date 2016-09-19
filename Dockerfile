@@ -7,7 +7,7 @@ RUN echo 'Europe/Amsterdam' > /etc/timezone \
  && apk add tzdata \
  && cp /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime \
  && apk del tzdata \
- && run rm -f /etc/nginx/conf.d/* /var/cache/apk/*
+ && rm -f /etc/nginx/conf.d/* /var/cache/apk/*
 
 COPY nginx/index.html         /var/www/html/index.html
 COPY nginx/nginx.conf         /etc/nginx/nginx.conf
