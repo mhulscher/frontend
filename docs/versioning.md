@@ -1,4 +1,4 @@
-CI/CD will only push Docker images of the master-branch to the registy. Per image, you will find the following tags available. The latest tagged stable version is 0.0.1.
+CI/CD will only push Docker images of the master-branch to the registry. Per image, you will find the following tags available. The latest tagged stable version is 0.0.1.
 
 ```
 docker1-registry.twobridges.io/frontend:latest

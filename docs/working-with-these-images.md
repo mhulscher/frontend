@@ -8,7 +8,7 @@ MAINTAINER Mitch Hulscher "mitch.hulscher@nepworldwide.nl"
 COPY . /var/www/html
 ```
 
-## FlatIron applicatino, Dockerfile
+## FlatIron application, Dockerfile
 ```
 FROM docker1-registry.twobridges.io/frontend:0
 MAINTAINER Mitch Hulscher "mitch.hulscher@nepworldwide.nl"
