@@ -1,6 +1,6 @@
 # frontend
 
-The `nginx-php-fpm` builds several Docker-images that you can use as a base for your own frontend projects. The following Docker-images are produced:
+This `frontend` project builds several Docker-images that you can use as a base for your own frontend projects. The following Docker-images are produced:
 
 * frontend:latest
 * frontend:test-latest
