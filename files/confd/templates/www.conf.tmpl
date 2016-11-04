@@ -14,7 +14,7 @@ server {
 {{else}}
   location / {
     index {{getv "/ngx/index"}};
-    try_files $uri {{getv "/ngx/index"}} =404;
+    try_files $uri /{{getv "/ngx/index"}} =404;
   }
 
   location = /healthz {
@@ -44,7 +44,7 @@ server {
 
   location / {
     index {{getv "/ngx/index"}};
-    try_files $uri {{getv "/ngx/index"}} =404;
+    try_files $uri /{{getv "/ngx/index"}} =404;
   }
 
   location = /healthz {
