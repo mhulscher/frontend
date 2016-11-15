@@ -21,8 +21,10 @@ if [[ -f /tls/tls.crt && -f /tls/tls.key ]]; then
   export NGX_TLS=1
 fi
 
-cat ${NGX_DOCUMENT_ROOT}/${ENVIRONMENT_FILE} | envsubst > ${NGX_DOCUMENT_ROOT}/${ENVIRONMENT_FILE}.tmp
-mv  ${NGX_DOCUMENT_ROOT}/${ENVIRONMENT_FILE}.tmp ${NGX_DOCUMENT_ROOT}/${ENVIRONMENT_FILE}
+if [ -f "${NGX_DOCUMENT_ROOT}/${ENVIRONMENT_FILE}" ]; then
+  cat ${NGX_DOCUMENT_ROOT}/${ENVIRONMENT_FILE} | envsubst > ${NGX_DOCUMENT_ROOT}/${ENVIRONMENT_FILE}.tmp
+  mv  ${NGX_DOCUMENT_ROOT}/${ENVIRONMENT_FILE}.tmp ${NGX_DOCUMENT_ROOT}/${ENVIRONMENT_FILE}
+fi
 
 confd -onetime -backend env -log-level $CONFD_LOG_LEVEL
 
