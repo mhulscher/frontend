@@ -3,6 +3,9 @@
 # Safe mode
 set -eufo pipefail
 
+gunzip   /usr/bin/confd.gz
+chmod +x /usr/bin/confd
+
 # Configuration of confd
 export CONFD_LOG_LEVEL="${CONFD_LOG_LEVEL:-info}"
 

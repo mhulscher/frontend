@@ -4,15 +4,15 @@ You can change the behaviour of this image by setting one or more environment va
 
 Environment variable | Default value | Description
 --- | --- | ---
-CONFD_LOG_LEVEL | `info` | Defines the log level of confd, which is used to generate the nginx vhost configuration file from a template.
+`CONFD_LOG_LEVEL` | `info` | Defines the log level of confd, which is used to generate the nginx vhost configuration file from a template.
 
 ## Nginx
 
 Environment variable | Default value | Description
 --- | --- | ---
-NGX_DOCUMENT_ROOT | /var/www/html | Defines the document root.
-NGX_PROXY | absent | Toggles whether Nginx should derive the real ip-address from the X-Real-IP header. Lookups are **not** done recursive. Only a single substition will take place. Only use this if your container is running behind a reverse proxy that you trust.
-NGX_TLS | absent | This will be set to 1, which will enable TLS inside nginx, but only if the files `/tls/tls.key` and `/tls/tls.crt` are found inside the container. Use a volume mount, Kubernetes configmap/secret or something similar.
+`NGX_DOCUMENT_ROOT` | /var/www/html | Defines the document root.
+`NGX_PROXY` | absent | Toggles whether Nginx should derive the real ip-address from the X-Real-IP header. Lookups are **not** done recursive. Only a single substition will take place. Only use this if your container is running behind a reverse proxy that you trust.
+`NGX_TLS` | absent | This will be set to 1, which will enable TLS inside nginx, but only if the files `/tls/tls.key` and `/tls/tls.crt` are found inside the container. Use a volume mount, Kubernetes configmap/secret or something similar.
 
 ## Application
 
