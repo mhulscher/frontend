@@ -1,5 +1,8 @@
 ifndef $(RELEASE)
 RELEASE=$(shell git tag -l --points-at HEAD)
+ifneq ($(RELEASE),)
+MAJOR=$(shell echo ${RELEASE} | cut -d. -f1)
+endif
 endif
 BRANCH=$(shell git rev-parse --abbrev-ref HEAD | perl -ne 'print lc' | tr /: -)
 COMMIT=$(BRANCH)-$(shell git rev-parse --short HEAD)
@@ -22,12 +25,14 @@ docker-image:
 	docker build --force-rm -t $(REPOSITORY):$(COMMIT) .
 ifneq ($(RELEASE),)
 	docker tag $(REPOSITORY):$(COMMIT) $(REPOSITORY):$(RELEASE)
+	docker tag $(REPOSITORY):$(COMMIT) $(REPOSITORY):$(MAJOR)
 endif
 
 docker-push:
 	docker push $(REPOSITORY):$(COMMIT)
 ifneq ($(RELEASE),)
 	docker push $(REPOSITORY):$(RELEASE)
+	docker push $(REPOSITORY):$(MAJOR)
 endif
 
 write-version:
@@ -41,6 +46,7 @@ docker-rmi:
 	docker rmi $(REPOSITORY):$(COMMIT)
 ifneq ($(RELEASE),)
 	docker rmi $(REPOSITORY):$(RELEASE)
+	docker rmi $(REPOSITORY):$(MAJOR)
 endif
 
 deis-deploy:
