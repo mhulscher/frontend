@@ -12,8 +12,11 @@ REPOSITORY=$(REGISTRY)/$(APP)
 all: docker-image
 clean: docker-rmi
 
-ci-build: docker-image docker-push write-version docker-rmi
+ci-build: docker-image test docker-push write-version docker-rmi
 ci-deploy: deis-deploy
+
+test:
+	bash ./tests.sh $(REPOSITORY):$(COMMIT)
 
 docker-image:
 	docker build --force-rm -t $(REPOSITORY):$(COMMIT) .
